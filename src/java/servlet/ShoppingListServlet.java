@@ -57,6 +57,7 @@ public class ShoppingListServlet extends HttpServlet {
            
             case  "delete":
                 String itemsAdded = request.getParameter("itemsAdded");
+                String deleteItem;
                 
             
                 break;

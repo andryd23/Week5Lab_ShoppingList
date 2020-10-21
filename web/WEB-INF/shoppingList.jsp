@@ -25,7 +25,7 @@
         </form>
         
         <form action="" method="POST">
-            <c:forEach items="${itemsList}" var="item">
+            <c:forEach items="${itemsList}" var="itemsAdded">
                 <label><input type="radio" name="itemsAdded" value="${itemsAdded}"<c:out value="${itemsAdded}"/></label> 
             </c:forEach> 
             <input type="submit" value="Delete">

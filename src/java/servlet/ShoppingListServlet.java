@@ -35,7 +35,6 @@ public class ShoppingListServlet extends HttpServlet {
               return;
           }
           
-          
     }
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,18 +51,33 @@ public class ShoppingListServlet extends HttpServlet {
             case "add":
                 listOfItems.add(request.getParameter("Add item"));
                 session.setAttribute("itemsList", listOfItems);
-                getServletContext().getRequestDispatcher("/WEB-INF/shoppingList").forward(request, response); 
+                getServletContext().getRequestDispatcher("/WEB-INF/shoppingList.jsp").forward(request, response); 
                 break;
            
             case  "delete":
                 String itemsAdded = request.getParameter("itemsAdded");
-                String deleteItem;
+                if(itemsAdded == null | itemsAdded.equals("")){
+                    getServletContext().getRequestDispatcher("/WEB-INF/shoppingList").forward(request, response);
+                    return;     
+                }
+                else{
+                int counter = 0;
+                for(int i = 0; i < listOfItems.size(); i++) {
+                    String itemSelected = listOfItems.get(i);
+                    if(itemSelected.equals(itemsAdded)){
+                        listOfItems.remove(i);
+                        counter++;
+                    }
+                }
                 
-            
+                if(counter > 0) {
+                    session.setAttribute("itemsList", listOfItems);
+                    getServletContext().getRequestDispatcher("/WEB-INF/shoppingList").forward(request, response);
+                }
+                
+                }
                 break;
-                
-            
-            
+                      
             
         }
         
